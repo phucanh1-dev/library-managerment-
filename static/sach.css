@@ -1,0 +1,115 @@
+.header-sach {
+    background-color: #008080;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 24px;
+}
+
+.input-sach {
+    width: 80%;
+    max-width: 90%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin: 10px auto;
+    display: block;
+    box-sizing: border-box;
+}
+
+
+
+.table-sach th {
+    background-color: #007bff;
+    color: white;
+        text-align: center;
+
+}
+.table-sach td{
+        text-align: center;
+
+}
+.table-sach tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+.form-container-sach {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+}
+
+.row-sach {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.column-sach {
+    flex: 1;
+    margin-right: 15px;
+}
+
+.column-sach:last-child {
+    margin-right: 0;
+}
+
+.column-sach label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.column-sach input,
+.column-sach select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.button-container-sach {
+    text-align: center;
+}
+
+.button-sach {
+    padding: 10px 20px;
+    margin: 5px 5px 5px 0;
+    border: none;
+    border-radius: 3px;
+    background-color: #008080;
+    color: white;
+    cursor: pointer;
+    width: 30%;
+}
+.table-container-sach {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Căn giữa các phần tử con theo chiều ngang */
+
+}
+
+
+.btn-delete-sach {
+  background-color: #de4242;
+  color: white;
+  border: none;
+  padding: 7px 10px 7px 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-delete-sach:hover {
+  background-color: #a7fa01;
+}
+
+.col-chuc-nang-xoa-sach {
+  text-align: center;
+  vertical-align: middle; /* Centers /* Centers content vertically within the cell */
+}

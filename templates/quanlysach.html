@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}Quản Lý Sách - Hệ Thống Quản Lý Thư Viện{% endblock %}
+
+{% block content %}
+<!-- Main content -->
+<div class="main-content-quanlysach">
+    <div class="header-quanlysach">Quản lý sách</div>
+
+    <!-- Category buttons -->
+    <div class="category-buttons-quanlysach">
+        <a href="{{ url_for('sach.get_sach') }}" class="category-button-quanlysach button-sach1">SÁCH</a>
+        <a href="{{ url_for('loaisach.get_loaisach') }}" class="category-button-quanlysach button-loaisach">LOẠI
+            SÁCH</a>
+        <a href="{{ url_for('tacgia.get_tacgia') }}" class="category-button-quanlysach button-tacgia">TÁC GIẢ</a>
+        <a href="{{ url_for('nhaxuatban.get_nxb') }}" class="category-button-quanlysach button-nxb">NXB</a>
+    </div>
+
+    <!-- Search section -->
+    <div class="search-section-quanlysach">
+        <h3>Tìm Kiếm</h3>
+        <div class="search-options-quanlysach">
+            <label><input type="radio" name="search" checked value="tenSach"> Tên Sách</label>
+            <label><input type="radio" name="search" value="loaiSach"> Loại Sách</label>
+            <label><input type="radio" name="search" value="nhaXuatBan"> Nhà Xuất Bản</label>
+            <label><input type="radio" name="search" value="tacGia"> Tác Giả</label>
+        </div>
+        <input type="text" class="search-box" id="tim-kiem" onkeyup="searchFunction()" placeholder="Nhập từ khóa tìm kiếm...">
+    </div>
+
+    <!-- Display list section -->
+    <div class="listhienthi-sach">
+        <h2>Danh Sách Sách</h2>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Mã sách</th>
+                    <th>Tên sách</th>
+                    <th>Tên loại sách</th>
+                    <th>Nhà xuất bản</th>
+                    <th>Tác giả</th>
+                    <th>Số trang</th>
+                    <th>Giá bán</th>
+                    <th>Số lượng</th>
+                    <th>Ảnh</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for qlsach in quanlysachs %}
+                <tr>
+                    <td>{{ qlsach[0] }}</td>
+                    <td>{{ qlsach[1] }}</td>
+                    <td>{{ qlsach[2] }}</td>
+                    <td>{{ qlsach[3] }}</td>
+                    <td>{{ qlsach[4] }}</td>
+                    <td>{{ qlsach[5] }}</td>
+                    <td>{{ qlsach[6] }}</td>
+                    <td>{{ qlsach[7] }}</td>
+                    <td><img src="{{ url_for('duongdan_picture', filename=qlsach[8]) }}" alt="{{ qlsach[8] }}"
+                            width="100" height="140"></td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    function searchFunction() {
+    // Get the search input and its value
+    var input = document.getElementById("tim-kiem");
+    var filter = input.value.toLowerCase();
+    // Get the selected search option
+    var searchType = document.querySelector('input[name="search"]:checked').value;
+
+    // Get the table and rows
+    var table = document.querySelector(".data-table tbody");
+    var rows = table.getElementsByTagName("tr");
+
+    // Define column indexes for each search type
+    const columnIndexes = {
+        'tenSach': 1,    // Tên Sách column
+        'loaiSach': 2,   // Loại Sách column
+        'nhaXuatBan': 3, // Nhà Xuất Bản column
+        'tacGia': 4      // Tác Giả column
+    };
+
+    // Get the column index to search in
+    var columnIndex = columnIndexes[searchType];
+
+    // Loop through all table rows
+    for (var i = 0; i < rows.length; i++) {
+        var cell = rows[i].getElementsByTagName("td")[columnIndex];
+        if (cell) {
+            var text = cell.textContent || cell.innerText;
+            if (text.toLowerCase().indexOf(filter) > -1) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
+            }
+        }
+    }
+}
+
+// Add event listeners to radio buttons to trigger search when option changes
+document.querySelectorAll('input[name="search"]').forEach(radio => {
+    radio.addEventListener('change', searchFunction);
+});
+</script>
+{% endblock %}

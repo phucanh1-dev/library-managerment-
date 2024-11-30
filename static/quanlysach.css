@@ -1,0 +1,119 @@
+/* Sidebar styles */
+
+
+/* Main content styles */
+.main-content-quanlysach {
+    flex: 1;
+    background-color: #f4f6f8;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header styles */
+.header-quanlysach {
+    background-color: #2AA198;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+/* Category buttons styles */
+.category-buttons-quanlysach {
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.category-button-quanlysach {
+    padding: 15px 40px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.button-sach1 {
+    background-color: #4F46E5;
+}
+
+.button-loaisach {
+    background-color: #059669;
+}
+
+.button-tacgia {
+    background-color: #6B7280;
+}
+
+.button-nxb {
+    background-color: #F87171;
+}
+
+/* Search section styles */
+.search-section-quanlysach {
+    margin: 8px;
+    border: 2px solid #e5e7eb;
+    padding: 10px;
+}
+
+.listhienthi-quanlysach {
+    padding-top: 10px;
+    padding-left: 10px;
+    margin-top: 5px;
+    border: 1px solid #e5e7eb;
+}
+
+.search-options-quanlysach {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.search-box-quanlysach {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+}
+
+/* Table styles */
+.data-table {
+    border: 2px solid #9eabc7;
+    width: 100%;
+    padding: 5px;
+    border-collapse: collapse;
+    margin: 8px;
+}
+
+.data-table th {
+    background-color: #4F46E5;
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+.data-table tr:nth-child(even) {
+    background-color: #EEF2FF;
+}
+
+.data-table td {
+    padding: 12px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* Footer styles */
+.footer {
+    background-color: #009688;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

@@ -1,0 +1,127 @@
+/* Main Header */
+.main-header {
+  width: 100%;
+  text-align: center;
+  background-color: #00796b;
+  color: #ffffff;
+  padding: 15px;
+  font-size: 24px;
+  font-weight: bold;
+}
+.header-loaisach{
+  background-color: #2AA198;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+/* Sub Header */
+
+/* Container */
+.container {
+  width: 90%;
+  max-width: 1100px;
+  background-color: #ffffff;
+  border: 2px solid #00796b;
+  border-radius: 8px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+}
+
+/* Left Form Section */
+
+
+
+table th {
+  background-color: #00796b;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+
+}
+
+table td {
+  text-align: center;
+
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Buttons Section */
+.buttons-section {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.buttons-section button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #efebeb;
+  background-color: rgb(4, 143, 236);
+  border: 2px solid #fa9f01;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.buttons-section button:hover {
+  background-color: #f9f515;
+  color: rgb(0, 0, 0);
+}
+/* Delete Button Styling */
+
+
+.btn-delete-loaisach {
+  background-color: #de4242;
+  color: white;
+  border: none;
+  padding: 7px 10px 7px 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-delete-loaisach:hover {
+  background-color: #a7fa01;
+}
+
+.col-chuc-nang-xoa-loaisach {
+  text-align: center;
+  vertical-align: middle; /* Centers content vertically within the cell */
+}
+
+.right-section td{
+  text-align: center;
+
+}
+.col-ma-loai{
+  text-align: center;
+}
+
+
+.col-ten-loai-sach{
+  text-align: center;
+
+}
+
+.col-ghi-chu{
+  text-align: center;
+
+}
+.col-chuc-nang{
+  text-align: center;
+
+}

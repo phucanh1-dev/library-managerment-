@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block title %}Quản Lý Sách - Hệ Thống Quản Lý Thư Viện{% endblock %}
+
+{% block content %}
+
+<div class="main-content">
+    <div class="header-loaisach">
+        LOẠI SÁCH
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Left Form Section -->
+        <div class="left-section">
+            <form method="POST">
+              <div>
+                <div class="form-group">
+                    <label for="maLoai">Mã Loại</label>
+                    <input type="text" id="maLoai" name="maLoai" >
+                </div>
+                <div class="form-group">
+                    <label for="loaiSach">Loại Sách</label>
+                    <input type="text" id="loaiSach" name="loaiSach" >
+                </div>
+                <div class="form-group">
+                    <label for="ghiChu">Ghi Chú</label>
+                    <input type="text" id="ghiChu" name="ghiChu">
+                </div>
+                <div>
+                  {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="flash-messages">
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ category }}">{{ message }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+                </div>
+              </div>
+              <div class="buttons-section">
+                <button type="submit" formaction="{{ url_for('loaisach.them_loaisach') }}">Thêm</button>
+                <button type="submit" formaction="{{ url_for('loaisach.sua_loaisach') }}">Sửa</button>
+                <button type="reset">Làm mới</button>
+            </div>
+
+            </form>
+        </div>
+
+        <!-- Right Search and Table Section -->
+        <div class="right-section">
+            <div class="search-bar-loaisach">
+                <input type="text" id="search-loaisach" onkeyup="searchFunction()" placeholder="Nhập mã hoặc tên loại sách để tìm kiếm...">
+            </div>            
+            <table>
+                <thead>
+                    <tr>
+                        <th class="col-ma-loai">Mã loại sách</th>
+                        <th class="col-ten-loai-sach">Tên loại</th>
+                        <th class="col-ghi-chu">Ghi chú</th>
+                        <th class="col-chuc-nang">Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for loaisach in loaisachs %}
+                    <tr onclick="populateForm('{{ loaisach[0] }}', '{{ loaisach[1] }}', '{{ loaisach[2] }}')">
+                        <td>{{ loaisach[0] }}</td>
+                        <td>{{ loaisach[1] }}</td>
+                        <td>{{ loaisach[2] }}</td>
+                        <td class="col-chuc-nang-xoa-loaisach">
+                            <form action="{{ url_for('loaisach.xoa_loaisach', maLoai=loaisach[0]) }}" method="POST" style="display:inline;">
+                                <button type="submit" class="btn-delete-loaisach" onclick="return confirm('Bạn có chắc chắn muốn xóa loại sách này?');">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    function populateForm(maLoai, loaiSach, ghiChu) {
+        document.getElementById('maLoai').value = maLoai;
+        document.getElementById('loaiSach').value = loaiSach;
+        document.getElementById('ghiChu').value = ghiChu;
+    }
+
+</script>
+<script>
+    function searchFunction() {
+        var input = document.getElementById("search-loaisach");
+        var filter = input.value.toLowerCase();  // Chuyển thành chữ thường để tìm kiếm không phân biệt chữ hoa chữ thường
+        var table = document.querySelector("table tbody");  // Lấy phần body của bảng
+        var rows = table.getElementsByTagName("tr");  // Lấy tất cả các dòng trong bảng
+
+        // Duyệt qua tất cả các dòng trong bảng
+        for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].getElementsByTagName("td");  // Lấy tất cả các ô trong dòng
+            var match = false;  // Biến kiểm tra nếu dòng này có phù hợp với từ khóa tìm kiếm
+
+            // Duyệt qua từng ô trong dòng
+            for (var j = 0; j < cells.length; j++) {
+                var cell = cells[j];
+                if (cell) {
+                    var text = cell.textContent || cell.innerText;  // Lấy nội dung của ô
+                    if (text.toLowerCase().indexOf(filter) > -1) {
+                        match = true;  // Nếu có ô nào trong dòng trùng khớp, đặt match = true
+                        break;
+                    }
+                }
+            }
+
+            // Hiển thị dòng nếu có bất kỳ ô nào trùng khớp
+            if (match) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";  // Ẩn dòng nếu không có khớp
+            }
+        }
+    }
+</script>
+
+{% endblock %}

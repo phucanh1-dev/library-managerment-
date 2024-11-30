@@ -1,0 +1,45 @@
+{% extends "quanlysach.html" %}
+
+{% block title %}Danh Sách Sách - Hệ Thống Quản Lý Thư Viện{% endblock %}
+
+{% block danhmuc %}
+    <div class="main-content">
+        <h2>Danh Sách Sách</h2>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Mã sách</th>
+                    <th>Tên sách</th>
+                    <th>Tên loại sách</th>
+                    <th>Nhà xuất bản</th>
+                    <th>Tác giả</th>
+                    <th>Số trang</th>
+                    <th>Giá bán</th>
+                    <th>Số lượng</th>
+                    <th>Ảnh</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sach in sachs %}
+            <tr>
+                <td>{{ sach[0] }}</td> <!-- MaSach -->
+                <td>{{ sach[1] }}</td> <!-- TenSach -->
+                <td>{{ sach[2] }}</td> <!-- TenLoaiSach -->
+                <td>{{ sach[3] }}</td> <!-- NhaXuatBan -->
+                <td>{{ sach[4] }}</td> <!-- TacGia -->
+                <td>{{ sach[5] }}</td> <!-- SoTrang -->
+                <td>{{ sach[6] }}</td> <!-- GiaBan -->
+                <td>{{ sach[7] }}</td> <!-- SoLuong -->
+            <td><img src="{{ url_for('duongdan_picture', filename=sach[8]) }}" alt="{{ sach[8] }}" width="100" height="140"></td>
+            <!-- <td><img src="{{ url_for('static', filename='picture/' + sach[8]) }}" alt="{{ sach[8] }}" width="100" height="140"></td> -->
+            </tr>
+            {% endfor %}
+            
+            </tbody>
+        </table>
+        
+        <div class="footer">
+            @ 2024 - Đại Học công nghệ đông á
+        </div>
+    </div>
+{% endblock %}

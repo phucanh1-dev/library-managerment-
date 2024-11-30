@@ -1,0 +1,273 @@
+{% extends "base.html" %}
+
+{% block title %}Quản Lý Sách - Hệ Thống Quản Lý Thư Viện{% endblock %}
+
+{% block content %}
+
+        <div class="main-content-quanlynhanvien">
+            <!-- Header -->
+                <div class="header-quanlynhanvien">HỆ THỐNG QUẢN LÝ NHÂN VIÊN</div>
+
+
+            <!-- Content -->
+            <div class="content-quanlynhanvien">
+
+                <!-- Registration Form -->
+                <!-- Registration Form -->
+                <div class="row">
+                <div class="col-md-4 sidebar-quanlynhanvien">
+
+                <div class="form-section-quanlynhanvien">
+                    <h3>Thông tin</h3>
+                    <form method="POST">
+                    <div class="form-group">
+                        <label for="maNhanVien">Mã nhan vien</label>
+                        <input type="text" id="maNhanVien" name="maNhanVien" >
+                    </div>
+                    <div class="form-group">
+                        <label for="tenNhanVien">Tên nhan vien</label>
+                        <input type="text" id="tenNhanVien" name="tenNhanVien" >
+                    </div>
+                    <div class="form-group">
+                        <label for="soDienThoai">So dien thoai</label>
+                        <input type="text" id="soDienThoai" name="soDienThoai">
+                    </div>
+                        <div class="form-group">
+                        <label for="gioiTinh"> Gioi tinh</label>
+                            <select type="text" id="gioiTinh" name="gioiTinh">
+                                <option>Nam</option>
+                                <option>Nữ</option>
+                            </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="diaChi">Dia chi</label>
+                        <input type="text" id="diaChi" name="diaChi" >
+                    </div>
+                    <div class="form-group">
+                        <label for="matKhau">Mat khau</label>
+                        <input type="text" id="matKhau" name="matKhau">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="vaiTro"> Vai Trò</label>
+                        <select type="text" id="vaiTro" name="vaiTro">
+                            <option>NhanVien</option>
+                            <option>Admin</option>
+                        </select>
+                    </div>
+                    <div>
+                  {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="flash-messages">
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ category }}">{{ message }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+                </div>
+                    <!-- Buttons -->
+                    <div class="button-section-quanlynhanvien">
+                    <button type="submit"  formaction="{{ url_for('quanlynhanvien.them_quanlynhanvien') }}">Thêm</button>
+                    <button type="submit" formaction="{{ url_for('quanlynhanvien.sua_quanlynhanvien') }}">Sửa</button>
+                    <button type="reset">Làm mới</button>
+                    </div>
+                    </form>
+                </div>
+                </div>
+
+                <!-- Employee Table -->
+                <div class="col-md-8 sidebar-quanlynhanvien">
+                <div>
+                    <input type="text" class="search-input-quanlynhanvien" placeholder="Nhập từ khóa tìm kiếm...">
+                    <div>
+                        <label><input type="radio" name="search-option" value="maNhanVien" checked> Mã Nhân Viên</label>
+                        <label><input type="radio" name="search-option" value="tenNhanVien"> Tên Nhân Viên</label>
+                    </div>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Mã Nhân Viên</th>
+                            <th>Tên Nhân Viên</th>
+                            <th>Số Điện Thoại</th>
+                            <th>Giới Tính</th>
+                            <th>Địa Chỉ</th>
+                            <th>Mật Khẩu</th>
+                            <th>Vai Trò</th>
+                            <th class="col-chuc-nang-quanlysinhvien">Chức năng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for quanlynhanvien in quanlynhanviens %}
+                    <tr onclick="populateForm('{{ quanlynhanvien[0] }}', '{{ quanlynhanvien[1] }}', '{{ quanlynhanvien[2] }}', '{{ quanlynhanvien[3] }}', '{{ quanlynhanvien[4] }}', '{{ quanlynhanvien[5] }}', '{{ quanlynhanvien[6] }}', '{{ quanlynhanvien[7] }}', '{{ quanlynhanvien[8] }}')">
+                        <td>{{ quanlynhanvien[0] }}</td>
+                        <td>{{ quanlynhanvien[1] }}</td>
+                        <td>{{ quanlynhanvien[2] }}</td>
+                        <td>{{ quanlynhanvien[3] }}</td>
+                        <td>{{ quanlynhanvien[4] }}</td>
+
+                        <td>
+                            <input type="password" id="password-{{ loop.index }}" value="{{ quanlynhanvien[5] }}" readonly>
+                            <button type="button" onclick="togglePassword('password-{{ loop.index }}')">
+                                <i class="fa fa-eye" id="icon-{{ loop.index }}"></i>
+                            </button>
+                        </td>
+
+                        <td>{{ quanlynhanvien[6] }}</td>
+
+
+                    <td class="col-chuc-nang-xoa-quanlynhanvien">
+                            <form action="{{ url_for('quanlynhanvien.xoa_quanlynhanvien', maNhanVien=quanlynhanvien[0]) }}" method="POST" style="display:inline;">
+                                <button type="submit" class="btn-delete-quanlynhanvien" onclick="return confirm('Bạn có chắc chắn muốn xóa nhan vien này?');">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </form>
+                    </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+            </div>
+            </div>
+            <!-- Footer -->
+            </div>
+        </div>
+<script>
+    function populateForm(maNhanVien, tenNhanVien, soDienThoai, gioiTinh, diaChi, matKhau, vaiTro) {
+        document.getElementById('maNhanVien').value = maNhanVien;
+        document.getElementById('tenNhanVien').value = tenNhanVien;
+        document.getElementById('soDienThoai').value = soDienThoai;
+        document.getElementById('gioiTinh').value = gioiTinh;
+        document.getElementById('diaChi').value = diaChi;
+        document.getElementById('matKhau').value = matKhau;
+        document.getElementById('vaiTro').value = vaiTro;
+     }
+
+    function searchFunction() {
+        // Get the search input and its value
+        var input = document.querySelector('.search-input-quanlynhanvien');
+        var filter = input.value.toLowerCase();
+
+        // Get the selected search option
+        var searchType = document.querySelector('input[name="search-option"]:checked').value;
+
+        // Get the table and rows
+        var table = document.querySelector(".data-table tbody");
+        var rows = table.getElementsByTagName("tr");
+
+        // Define column indexes for each search type
+        const columnIndexes = {
+            'maNhanVien': 0,    // Mã Nhân Viên column
+            'tenNhanVien': 1    // Tên Nhân Viên column
+        };
+
+        // Get the column index to search in
+        var columnIndex = columnIndexes[searchType];
+
+        // Loop through all table rows
+        for (var i = 0; i < rows.length; i++) {
+            var cell = rows[i].getElementsByTagName("td")[columnIndex];
+            if (cell) {
+                var text = cell.textContent || cell.innerText;
+                if (text.toLowerCase().indexOf(filter) > -1) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    // Add event listeners
+    document.addEventListener('DOMContentLoaded', function () {
+        // Add listener to search input
+        var searchInput = document.querySelector('.search-input-quanlynhanvien');
+        if (searchInput) {
+            searchInput.addEventListener('keyup', searchFunction);
+        }
+
+        // Add listeners to radio buttons
+        document.querySelectorAll('input[name="search-option"]').forEach(radio => {
+            radio.addEventListener('change', searchFunction);
+        });
+    });
+
+    // Lấy các phần tử DOM
+    const maSinhVienSelect = document.getElementById('maSinhVien');
+    const maSVInput = document.getElementById('maSV');
+    const tenSVInput = document.getElementById('tenSV');
+
+    // Gắn sự kiện onchange
+    maSinhVienSelect.addEventListener('change', function () {
+        // Lấy option được chọn
+        const selectedOption = maSinhVienSelect.options[maSinhVienSelect.selectedIndex];
+        // Lấy dữ liệu từ các data-attributes
+        const maSV = selectedOption.value;
+        const tenSV = selectedOption.getAttribute('data-ten');
+        // Cập nhật giá trị vào các input
+        maSVInput.value = maSV;
+        tenSVInput.value = tenSV;
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        const tenSachSelect = document.getElementById('tenSach');
+        const maSachInput = document.getElementById('maSach');
+        const tenSachInput = document.getElementById('tenSachInput');
+        const tenTacGiaInput = document.getElementById('tenTacGiaInput');
+        const soluongInput = document.getElementById('soluongInput');
+
+        tenSachSelect.addEventListener('change', function () {
+            const selectedOption = tenSachSelect.options[tenSachSelect.selectedIndex];
+            const maSach = selectedOption.value;
+            const tenSach = selectedOption.getAttribute('data-tensach');
+            const tenTacGia = selectedOption.getAttribute('data-tentacgia');
+            const soLuong = selectedOption.getAttribute('data-soluong');
+
+            maSachInput.value = maSach;
+            tenSachInput.value = tenSach;
+            tenTacGiaInput.value = tenTacGia;
+            soluongInput.value = soLuong;
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+    const ngayMuonInput = document.getElementById('ngayMuon');
+    const ngayTraInput = document.getElementById('ngayTra');
+
+    // Hàm định dạng ngày theo DD/MM/YYYY
+    function formatDate(date) {
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Tháng bắt đầu từ 0
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+    }
+
+    // Lấy thời gian hiện tại
+    const today = new Date();
+    ngayMuonInput.value = formatDate(today);
+
+    // Tính ngày trả (giả sử sau 7 ngày)
+    const returnDate = new Date();
+    returnDate.setDate(today.getDate() + 1);
+    ngayTraInput.value = formatDate(returnDate);
+});
+
+
+    function togglePassword(inputId) {
+    const passwordInput = document.getElementById(inputId);
+    const icon = document.querySelector(`#icon-${inputId.split('-')[1]}`);
+
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    } else {
+        passwordInput.type = "password";
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    }
+}
+
+
+</script>
+
+{% endblock %}
