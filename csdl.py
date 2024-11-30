@@ -10,4 +10,4 @@ def get_connection():
     f"charset=utf8;"
     )
     return pyodbc.connect(connection_string)
-123
+
